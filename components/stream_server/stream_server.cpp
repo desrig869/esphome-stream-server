@@ -1,3 +1,4 @@
+#include "esphome.h"
 #include "stream_server.h"
 
 #include "esphome/core/helpers.h"
