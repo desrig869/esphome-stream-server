@@ -55,15 +55,10 @@ void StreamServerComponent::dump_config() {
 
 
     ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address().c_str(), this->port_);
-#endif 
+#endif */ 
 
-      ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_ip_addresses(), this->port_);
-*/
-	auto ip_addresses = esphome::network::get_ip_addresses();
-        // Log the IP addresses
-	for (const auto& ip : ip_addresses) {
-	ESP_LOGCONFIG(TAG, "MyESP32: %s:%u", ip.to_string().c_str(), this->port_);
-	}
+      ESP_LOGCONFIG(TAG, "  Des Debug: %s:%u", "Dummy Entry", this->port_);
+
 #endif
 
 
