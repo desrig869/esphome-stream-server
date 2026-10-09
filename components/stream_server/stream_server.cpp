@@ -97,7 +97,10 @@ void StreamServerComponent::accept() {
 #if ESPHOME_VERSION_CODE >= VERSION_CODE(2026, 1, 0)
     std::string identifier = std::string{esphome::socket::SOCKADDR_STR_LEN, 0};
     auto identifier_span = std::span<char, esphome::socket::SOCKADDR_STR_LEN>(identifier.data(), identifier.size());
+/*
     identifier.resize(socket->getpeername_to(identifier_span));
+*/
+
 #else
     std::string identifier = socket->getpeername();
 #endif
