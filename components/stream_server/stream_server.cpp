@@ -1,4 +1,3 @@
-#include "esphome.h"
 #include "stream_server.h"
 
 #include "esphome/core/helpers.h"
@@ -10,7 +9,6 @@
 #include "esphome/components/socket/socket.h"
 
 static const char *TAG = "stream_server";
-
 
 using namespace esphome;
 
@@ -51,18 +49,13 @@ void StreamServerComponent::loop() {
 void StreamServerComponent::dump_config() {
     ESP_LOGCONFIG(TAG, "Stream Server:");
 #if ESPHOME_VERSION_CODE >= VERSION_CODE(2025, 11, 0)
-/* DGR
-    ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address(), this->port_);
-
-
+/*    ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address(), this->port_);
+DGR
+*/
+    ESP_LOGCONFIG(TAG, "  Listening on port %u", this->port_);
+#else
     ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address().c_str(), this->port_);
-#endif */ 
-
-      ESP_LOGCONFIG(TAG, " Listening on port : %u", this->port_);
-
 #endif
-
-
 #ifdef USE_BINARY_SENSOR
     LOG_BINARY_SENSOR("  ", "Connected:", this->connected_sensor_);
 #endif
@@ -102,8 +95,7 @@ void StreamServerComponent::accept() {
     socket->setblocking(false);
 
 #if ESPHOME_VERSION_CODE >= VERSION_CODE(2026, 1, 0)
-    std::string identifier = std::string{esphome::socket::SOCKADDR_STR_LEN, 0}
-
+    std::string identifier = std::string{esphome::socket::SOCKADDR_STR_LEN, 0};
     auto identifier_span = std::span<char, esphome::socket::SOCKADDR_STR_LEN>(identifier.data(), identifier.size());
     identifier.resize(socket->getpeername_to(identifier_span));
 #else
