@@ -115,7 +115,7 @@ void StreamServerComponent::accept() {
 
     this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
     ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
-    ESP_LOGD(TAG, "New client - sock len %d", SOCKADDR_STR_LEN);
+    ESP_LOGD(TAG, "New client - sock len %d - identfier len %d", esphome::socket::SOCKADDR_STR_LEN, identifier.size());
     this->publish_sensor();
 }
 
