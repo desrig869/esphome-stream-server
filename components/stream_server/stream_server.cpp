@@ -106,16 +106,12 @@ void StreamServerComponent::accept() {
 
     auto identifier_span = std::span<char, esphome::socket::SOCKADDR_STR_LEN>(identifier.data(), identifier.size());
     identifier.resize(socket->getpeername_to(identifier_span));
-    
-
 #else
-
     std::string identifier = socket->getpeername();
-#endif 
+#endif
 
     this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
     ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
-    ESP_LOGD(TAG, "New client - sock len %d - identfier len %d", esphome::socket::SOCKADDR_STR_LEN, identifier.size());
     this->publish_sensor();
 }
 
