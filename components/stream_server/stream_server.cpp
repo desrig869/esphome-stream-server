@@ -56,7 +56,7 @@ void StreamServerComponent::dump_config() {
     ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address().c_str(), this->port_);
 #endif */
 
-      ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::esp_wifi_get_mac(), this->port_);
+      ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_ip_addresses(), this->port_);
 #ifdef USE_BINARY_SENSOR
     LOG_BINARY_SENSOR("  ", "Connected:", this->connected_sensor_);
 #endif
