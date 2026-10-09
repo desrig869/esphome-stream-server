@@ -62,7 +62,7 @@ void StreamServerComponent::dump_config() {
         // Log the IP addresses
 	for (const auto& ip : ip_addresses) {
 	ESP_LOGCONFIG(TAG, "MyESP32:, %s:%u"", ip.to_string().c_str(), this->port_);
-
+	}
 #endif
 
 
