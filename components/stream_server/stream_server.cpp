@@ -1,10 +1,10 @@
 #include "stream_server.h"
-
+  
 #include "esphome/core/helpers.h"
 #include "esphome/core/log.h"
 #include "esphome/core/util.h"
 #include "esphome/core/version.h"
-
+  
 #include "esphome/components/network/util.h"
 #include "esphome/components/socket/socket.h"
 
@@ -106,6 +106,7 @@ void StreamServerComponent::accept() {
     ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
     ESP_LOGD(TAG, "New client id size : %d", identifier.size());
     ESP_LOGD(TAG, "New client SOCK :  %d", esphome::socket::SOCKADDR_STR_LEN );
+    ESP_LOGD(TAG, "New client id_span %s", identifier_span);
     this->publish_sensor();
 }
 
