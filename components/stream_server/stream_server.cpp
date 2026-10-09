@@ -57,7 +57,7 @@ void StreamServerComponent::dump_config() {
     ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address().c_str(), this->port_);
 #endif */ 
 
-      ESP_LOGCONFIG(TAG, "  Des Debug: %s:%u", "Dummy Entry", this->port_);
+      ESP_LOGCONFIG(TAG, " Listening on port : %u", this->port_);
 
 #endif
 
