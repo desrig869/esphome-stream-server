@@ -97,6 +97,8 @@ void StreamServerComponent::accept() {
 #if ESPHOME_VERSION_CODE >= VERSION_CODE(2026, 1, 0)
     std::string identifier = std::string{esphome::socket::SOCKADDR_STR_LEN, 0};
     ESP_LOGD(TAG, "New client1  size : %d", identifier.size());
+    identifier.resize(16);
+    ESP_LOGD(TAG, "New client2  size : %d", identifier.size());
     auto identifier_span = std::span<char, esphome::socket::SOCKADDR_STR_LEN>(identifier.data(), identifier.size());
 
     identifier.resize(socket->getpeername_to(identifier_span));
@@ -109,7 +111,7 @@ void StreamServerComponent::accept() {
     this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
     identifier.resize(16);
     ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
-    ESP_LOGD(TAG, "New client2 id size : %d", identifier.size());
+    ESP_LOGD(TAG, "New client3 id size : %d", identifier.size());
     ESP_LOGD(TAG, "New client SOCK :  %d", esphome::socket::SOCKADDR_STR_LEN );
     ESP_LOGD(TAG, "New client id_span %s", identifier_span);
     this->publish_sensor();
