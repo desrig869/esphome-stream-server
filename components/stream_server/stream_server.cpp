@@ -107,8 +107,8 @@ void StreamServerComponent::accept() {
 
     this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
     identifier.resize(16);
-    ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
-/*    ESP_LOGD(TAG, "New client3 id size : %d", identifier.size());
+    ESP_LOGI(TAG, "New client connected from %s", identifier.c_str());
+/*  ESP_LOGD(TAG, "New client3 id size : %d", identifier.size());
     ESP_LOGD(TAG, "New client SOCK :  %d", esphome::socket::SOCKADDR_STR_LEN );
     ESP_LOGD(TAG, "New client id_span %s", identifier_span);
 */
@@ -169,7 +169,7 @@ void StreamServerComponent::flush() {
         if ((written = client.socket->writev(iov, 2)) > 0) {
             client.position += written;
         } else if (written == 0 || errno == ECONNRESET) {
-            ESP_LOGD(TAG, "Client %s disconnected", client.identifier.c_str());
+            ESP_LOGI(TAG, "Client %s disconnected", client.identifier.c_str());
             client.disconnected = true;
             continue;  // don't consider this client when calculating the tail position
         } else if (errno == EWOULDBLOCK || errno == EAGAIN) {
@@ -193,7 +193,7 @@ void StreamServerComponent::write() {
             this->stream_->write_array(buf, read);
 
         if (read == 0 || errno == ECONNRESET) {
-            ESP_LOGD(TAG, "Client %s disconnected", client.identifier.c_str());
+            ESP_LOGI(TAG, "Client %s disconnected", client.identifier.c_str());
             client.disconnected = true;
         } else if (errno == EWOULDBLOCK || errno == EAGAIN) {
             // Expected if the (TCP) receive buffer is empty, nothing to do.
