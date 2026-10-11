@@ -49,9 +49,7 @@ void StreamServerComponent::loop() {
 void StreamServerComponent::dump_config() {
     ESP_LOGCONFIG(TAG, "Stream Server:");
 #if ESPHOME_VERSION_CODE >= VERSION_CODE(2025, 11, 0)
-/*    ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address(), this->port_);
-DGR
-*/
+/*    ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address(), this->port_); DGR */
     ESP_LOGCONFIG(TAG, "  Listening on port %u", this->port_);
 #else
     ESP_LOGCONFIG(TAG, "  Address: %s:%u", esphome::network::get_use_address().c_str(), this->port_);
@@ -107,7 +105,7 @@ void StreamServerComponent::accept() {
 
     this->clients_.emplace_back(std::move(socket), identifier, this->buf_head_);
     identifier.resize(16);
-    ESP_LOGI(TAG, "DGR New client connected from %s", identifier.c_str());
+    ESP_LOGI(TAG, "New client connected from %s", identifier.c_str());
 /*  ESP_LOGD(TAG, "New client3 id size : %d", identifier.size());
     ESP_LOGD(TAG, "New client SOCK :  %d", esphome::socket::SOCKADDR_STR_LEN );
     ESP_LOGD(TAG, "New client id_span %s", identifier_span);
